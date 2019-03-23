@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <ng-container *ngIf="(postList | async) as postListItems; else loading">
+            <ng-container *ngIf="(getPostList() | async) as postListItems;">
                 <table mat-table [dataSource]="postListItems" class="w-100 mat-elevation-z8">
 
                     <!-- Position Column -->
@@ -32,11 +32,21 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </ng-container>
-            <ng-template #loading>
-                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-            </ng-template>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
         </div>
     </div>
 </div>
 
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end">
+            <button mat-fab
+                    matTooltip="Create New Post"
+                    (click)="createPost()"
+                    color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {ApiConfig} from '../../ApiConfig';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PostListItem} from './dataModel/PostListItem';
+import {PostDto} from './dataModel/PostDto';
+import {CreatePostDto} from './dataModel/CreatePostDto';
 
 @Injectable()
 export class PostResource {
@@ -11,7 +12,11 @@ export class PostResource {
     constructor(private httpClient: HttpClient) {
     }
 
-    public findAll(): Observable<PostListItem[]> {
-        return this.httpClient.get(this.URL) as Observable<PostListItem[]>;
+    public findAll(): Observable<PostDto[]> {
+        return this.httpClient.get(this.URL) as Observable<PostDto[]>;
+    }
+
+    public create(createPostDto: CreatePostDto): Observable<PostDto> {
+        return this.httpClient.post(this.URL, createPostDto) as Observable<PostDto>;
     }
 }
