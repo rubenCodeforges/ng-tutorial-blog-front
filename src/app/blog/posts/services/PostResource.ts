@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PostDto} from './dataModel/PostDto';
 import {CreatePostDto} from './dataModel/CreatePostDto';
+import {EditPostDto} from './dataModel/EditPostDto';
 
 @Injectable()
 export class PostResource {
@@ -19,4 +20,13 @@ export class PostResource {
     public create(createPostDto: CreatePostDto): Observable<PostDto> {
         return this.httpClient.post(this.URL, createPostDto) as Observable<PostDto>;
     }
+
+    public edit(editPostDto: EditPostDto): Observable<PostDto> {
+        return this.httpClient.put(this.URL, editPostDto) as Observable<PostDto>;
+    }
+
+    public delete(postId: number): Observable<any> {
+        return this.httpClient.delete(this.URL + '/' + postId);
+    }
 }
+
